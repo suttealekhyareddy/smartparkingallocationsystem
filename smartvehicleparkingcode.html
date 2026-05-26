@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Parking Allocation System</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI;
+}
+
+body{
+    background:#f4f7fb;
+    color:#333;
+}
+
+/* HEADER */
+
+header{
+    background:linear-gradient(135deg,#0f4c81,#1b6ca8);
+    color:white;
+    padding:30px;
+    text-align:center;
+}
+
+header h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+header p{
+    font-size:18px;
+}
+
+/* NAVBAR */
+
+nav{
+    background:#083358;
+    padding:15px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 20px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#ffd369;
+}
+
+/* HERO SECTION */
+
+.hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:60px;
+    flex-wrap:wrap;
+}
+
+.hero-text{
+    width:50%;
+}
+
+.hero-text h2{
+    font-size:38px;
+    color:#0f4c81;
+    margin-bottom:20px;
+}
+
+.hero-text p{
+    font-size:18px;
+    line-height:1.7;
+}
+
+.hero-image{
+    width:40%;
+}
+
+.hero-image img{
+    width:100%;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* CARDS */
+
+.container{
+    padding:50px;
+}
+
+.section-title{
+    text-align:center;
+    font-size:34px;
+    color:#0f4c81;
+    margin-bottom:40px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+/* CSP MODEL */
+
+.csp-section{
+    background:#eaf3fb;
+    padding:60px;
+}
+
+.csp-box{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    max-width:1000px;
+    margin:auto;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+table th, table td{
+    border:1px solid #ccc;
+    padding:15px;
+    text-align:center;
+}
+
+table th{
+    background:#1b6ca8;
+    color:white;
+}
+
+/* FORM SECTION */
+
+.form-section{
+    padding:60px;
+    background:white;
+}
+
+.form-container{
+    max-width:700px;
+    margin:auto;
+    background:#f7f9fc;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+/* BUTTON */
+
+.btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:12px 25px;
+    background:#0f4c81;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+    font-size:16px;
+}
+
+.btn:hover{
+    background:#083358;
+}
+
+/* RESULT */
+
+.result-box{
+    margin-top:25px;
+    padding:20px;
+    background:#dff6dd;
+    border-left:6px solid green;
+    border-radius:10px;
+    display:none;
+}
+
+/* FEATURES */
+
+.features{
+    background:#f0f6ff;
+    padding:60px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#083358;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.hero{
+    flex-direction:column;
+    text-align:center;
+}
+
+.hero-text{
+    width:100%;
+    margin-bottom:30px;
+}
+
+.hero-image{
+    width:90%;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Smart Parking Allocation System</h1>
+    <p>Constraint Satisfaction Problem (CSP) Based Parking Management</p>
+</header>
+
+<nav>
+    <a href="#about">About</a>
+    <a href="#constraints">Constraints</a>
+    <a href="#model">CSP Model</a>
+    <a href="#allocation">Allocation</a>
+    <a href="#applications">Applications</a>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero" id="about">
+
+<div class="hero-text">
+    <h2>Efficient Smart Parking Solution</h2>
+
+    <p>
+        This Smart Parking Allocation System assigns vehicles to suitable
+        parking slots based on vehicle size, priority level,
+        distance, and slot availability using CSP techniques.
+    </p>
+
+    <button class="btn" onclick="scrollToForm()">
+        Allocate Parking
+    </button>
+
+</div>
+
+<div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a" alt="Parking">
+</div>
+
+</section>
+
+<!-- CONSTRAINTS -->
+
+<section class="container" id="constraints">
+
+<h2 class="section-title">Constraints Used</h2>
+
+<div class="cards">
+
+<div class="card">
+    <h3>Size Constraint</h3>
+    <p>Vehicles are assigned slots based on vehicle dimensions.</p>
+</div>
+
+<div class="card">
+    <h3>Priority Constraint</h3>
+    <p>VIP and emergency vehicles get nearest parking slots.</p>
+</div>
+
+<div class="card">
+    <h3>Distance Constraint</h3>
+    <p>Nearest available slots are preferred for efficiency.</p>
+</div>
+
+<div class="card">
+    <h3>Uniqueness Constraint</h3>
+    <p>Only one vehicle can occupy one slot at a time.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- CSP MODEL -->
+
+<section class="csp-section" id="model">
+
+<div class="csp-box">
+
+<h2>Vehicle Allocation Table</h2>
+
+<table>
+
+<tr>
+    <th>Vehicle</th>
+    <th>Type</th>
+    <th>Priority</th>
+    <th>Allocated Slot</th>
+</tr>
+
+<tr>
+    <td>Car1</td>
+    <td>Medium</td>
+    <td>Normal</td>
+    <td>Slot A</td>
+</tr>
+
+<tr>
+    <td>Bike1</td>
+    <td>Small</td>
+    <td>VIP</td>
+    <td>Slot B</td>
+</tr>
+
+<tr>
+    <td>Truck1</td>
+    <td>Large</td>
+    <td>Emergency</td>
+    <td>Slot D</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ALLOCATION FORM -->
+
+<section class="form-section" id="allocation">
+
+<h2 class="section-title">Parking Slot Allocation</h2>
+
+<div class="form-container">
+
+<div class="form-group">
+    <label>Vehicle Number</label>
+    <input type="text" id="vehicleNumber" placeholder="Enter Vehicle Number">
+</div>
+
+<div class="form-group">
+    <label>Vehicle Type</label>
+    <select id="vehicleType">
+        <option>Small</option>
+        <option>Medium</option>
+        <option>Large</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label>Priority Level</label>
+    <select id="priority">
+        <option>Normal</option>
+        <option>VIP</option>
+        <option>Emergency</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label>Distance Preference</label>
+    <select id="distance">
+        <option>Nearest</option>
+        <option>Medium</option>
+        <option>Far</option>
+    </select>
+</div>
+
+<button class="btn" onclick="allocateParking()">
+    Allocate Slot
+</button>
+
+<div class="result-box" id="resultBox">
+    <h3>Parking Allocated Successfully!</h3>
+    <p id="resultText"></p>
+</div>
+
+</div>
+
+</section>
+
+<!-- APPLICATIONS -->
+
+<section class="features" id="applications">
+
+<h2 class="section-title">Applications</h2>
+
+<div class="cards">
+
+<div class="card">
+    <h3>Shopping Malls</h3>
+    <p>Efficient customer parking management.</p>
+</div>
+
+<div class="card">
+    <h3>Smart Cities</h3>
+    <p>Integrated intelligent parking systems.</p>
+</div>
+
+<div class="card">
+    <h3>Airports</h3>
+    <p>Handles high vehicle traffic efficiently.</p>
+</div>
+
+<div class="card">
+    <h3>Universities</h3>
+    <p>Parking allocation for students and faculty.</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+    <p>© 2026 Smart Parking Allocation System</p>
+</footer>
+
+<script>
+
+function scrollToForm(){
+    document.getElementById("allocation").scrollIntoView({
+        behavior:'smooth'
+    });
+}
+
+function allocateParking(){
+
+    let vehicleNumber =
+        document.getElementById("vehicleNumber").value;
+
+    let vehicleType =
+        document.getElementById("vehicleType").value;
+
+    let priority =
+        document.getElementById("priority").value;
+
+    let distance =
+        document.getElementById("distance").value;
+
+    let slot = "";
+
+    if(vehicleType === "Small"){
+        slot = "Slot A";
+    }
+    else if(vehicleType === "Medium"){
+        slot = "Slot B";
+    }
+    else{
+        slot = "Slot D";
+    }
+
+    if(priority === "VIP"){
+        slot = "VIP-" + slot;
+    }
+
+    if(priority === "Emergency"){
+        slot = "Emergency-" + slot;
+    }
+
+    document.getElementById("resultBox").style.display = "block";
+
+    document.getElementById("resultText").innerHTML =
+        `
+        Vehicle Number: <b>${vehicleNumber}</b><br>
+        Vehicle Type: <b>${vehicleType}</b><br>
+        Priority: <b>${priority}</b><br>
+        Distance Preference: <b>${distance}</b><br>
+        Allocated Parking Slot: <b>${slot}</b>
+        `;
+}
+
+</script>
+
+</body>
+</html>
